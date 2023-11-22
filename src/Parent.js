@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import { getRandomColor } from "./randomColorGenerator.js";
 import Child from "./Child";
+import Ch from "./Ch.js";
 
 function Parent() {
   const randomColor = getRandomColor();
-  const [color, setColor] = useState(randomColor);
+  const [color, setColor] = useState(randomColor); // initial value for color state
+  const [childrenColor, setChildrenColor] = useState("#FFF");
+
+  function handleChangeColor(newChildColor) {
+    const newRandomColor = getRandomColor();
+    setColor(newRandomColor);
+    setChildrenColor(newChildColor);
+  }
 
   return (
     <div className="parent" style={{ backgroundColor: color }}>
-      <Child />
-      <Child />
+      <Child color={childrenColor} onChangeColor={handleChangeColor} />
+      <Ch color={childrenColor} onChangeColor={handleChangeColor} />
     </div>
   );
 }
